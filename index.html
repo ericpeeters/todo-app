@@ -7,7 +7,26 @@
     <title>Document</title>
 </head>
 <body>
-    
+
+    <div class="todos">
+        <div class="add-todos">
+            <input type="text" class="js-new-todo">
+            <button class="js-add-todo">Add</button>
+        </div>
+
+        <div class="todolist">
+            <ul class="js-todos">
+                
+            </ul>
+        </div>
+    </div>
+
+    <script class="js-single-todo-item-template" type="template">
+        <li>
+            <input type="checkbox">
+            <span>{{ title }}</span>
+        </li>
+    </script>
 
     <script src="dist/main.js"></script>   
 </body>
