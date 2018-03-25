@@ -7,3 +7,9 @@ Simple todo app for learning purposes.
 - Add to-do's
 - Remove to-do's
 - Save to-do's (works with localStorage for now)
+
+## Used Techniques: 
+- jQuery/JavaScript
+- Sass
+- Webpack
+- Yarn
