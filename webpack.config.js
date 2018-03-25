@@ -17,5 +17,10 @@ module.exports = {
                 loader: "sass-loader" // compiles Sass to CSS
             }]
         }]
+    }, 
+    resolve: {
+        alias: {
+            handlebars: 'handlebars/dist/handlebars.min.js'
+        }
     }
 };
