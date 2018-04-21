@@ -19,3 +19,9 @@ body { background-color: whitesmoke; font-family: Verdana, Geneva, Tahoma, sans-
         }
     }
 }
+
+.todo {
+        &.done {
+        text-decoration: line-through;
+    }
+}

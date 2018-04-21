@@ -5,5 +5,11 @@ export function saveTodos(todos) {
 }
 
 export function loadTodos() {
-    return JSON.parse(localStorage.getItem(todoKey));
+    const todos = localStorage.getItem(todoKey);
+
+    if (todos === null) {
+        return [];
+    }
+
+    return JSON.parse(todos);
 }
