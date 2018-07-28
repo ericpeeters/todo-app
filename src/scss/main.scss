@@ -10,7 +10,7 @@ body { background-color: whitesmoke; font-family: Verdana, Geneva, Tahoma, sans-
     width: 100%;
 
     .add-todos {
-    padding: 20px;
+        padding: 20px;
     }
 
     .todolist {
@@ -22,6 +22,6 @@ body { background-color: whitesmoke; font-family: Verdana, Geneva, Tahoma, sans-
 
 .todo {
         &.done {
-        text-decoration: line-through;
-    }
+            text-decoration: line-through;
+        }
 }
