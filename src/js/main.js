@@ -1,12 +1,14 @@
 import '../scss/main.scss';
 import $ from 'jquery';
-import handlebars from 'handlebars'; 
+import handlebars from 'handlebars';
 import { loadTodos, saveTodos } from './storage';
-
+import { formatDate } from './date';
 
 ///////////////////////////////////////////////////////////////////////
 //    Constants
 ///////////////////////////////////////////////////////////////////////
+
+const checkBoxSelector = '.js-todo-checkbox';
 
 const $todoList = $('.js-todos');
 const $singleTodoTemplate = $('.js-single-todo-item-template');
@@ -29,7 +31,11 @@ function addTodo(todo) {
 function onClickAddTodo() {
     const newTodo = $newTodoInput.val();
 
-    addTodo({ title: newTodo});
+    addTodo({
+        title: newTodo,
+        date: formatDate(),
+        done: false
+    });
 }
 
 function bindAddEvent() {
@@ -40,8 +46,60 @@ function bindAddEvent() {
 //    Show todo's
 ///////////////////////////////////////////////////////////////////////
 
+function setTodoDone($todoListItem, $todoCheckbox) {
+    $todoListItem.addClass('done');
+
+    const todos = loadTodos(),
+        date = $todoCheckbox.attr('id'),
+        todoData = todos.find(function (todo) {
+            return todo.date === date;
+        });
+
+    todoData.done = true;
+
+    saveTodos(todos);
+    // Find the todo
+    // set its state to 'done'
+    // save back to local storage
+}
+
+function setTodoPending($todoListItem, $todoCheckbox) {
+    $todoListItem.removeClass('done');
+
+    const todos = loadTodos(),
+        date = $todoCheckbox.attr('id'),
+        todoData = todos.find(function (todo) {
+            return todo.date === date;
+        });
+
+    todoData.done = false;
+
+    saveTodos(todos);
+}
+
+function onTodoCheckboxChange(event) {
+    const $checkbox = $(event.target),
+        $todo = $checkbox.parent();
+
+    if ($checkbox.prop('checked')) {
+        setTodoDone($todo, $checkbox);
+    } else {
+        setTodoPending($todo, $checkbox);
+    }
+}
+
+function bindTodoDone($todo) {
+    const $checkbox = $todo.find(checkBoxSelector);
+
+    $checkbox.on('change', onTodoCheckboxChange);
+}
+
 function showTodo(todo) {
-    $todoList.append(createTodo(todo));
+    const todoHTML = createTodo(todo),
+        $todoElement = $(todoHTML);
+
+    $todoList.append($todoElement);
+    bindTodoDone($todoElement);
 }
 
 function showTodos(todos) {
@@ -66,10 +124,10 @@ function init() {
 $(init);
 
 // const dummyData = [
-//     { title: "go to the mall"},
-//     { title: "get groceries"},
-//     { title: "buy flowers"},
-//     { title: "sleep"}
+//     { title: 'go to the mall'},
+//     { title: 'get groceries'},
+//     { title: 'buy flowers'},
+//     { title: 'sleep'}
 // ];
 
 // const todoHtml = '<li> {{ title}} </li>';

@@ -16,18 +16,20 @@
 
         <div class="todolist">
             <ul class="js-todos">
-                
+
             </ul>
         </div>
     </div>
 
     <script class="js-single-todo-item-template" type="template">
-        <li>
-            <input type="checkbox">
-            <span>{{ title }}</span>
+        <li class="todo {{#done}}done{{/done}}">
+            <input id="{{ date }}" class="js-todo-checkbox" type="checkbox" {{#done}}checked="checked"{{/done}}>
+            <label for="{{ date }}">{{ title }}</label>
+            <button>X</button>
         </li>
+
     </script>
 
-    <script src="dist/main.js"></script>   
+    <script src="dist/main.js"></script>
 </body>
 </html>
