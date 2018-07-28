@@ -6,22 +6,66 @@ body { background-color: whitesmoke; font-family: Verdana, Geneva, Tahoma, sans-
     box-shadow: 3px 2px 5px #d2d2d2;
     margin: 0 auto;
     max-width: 1000px;
-    padding: 20px;
+    padding: 40px;
     width: 100%;
 
-    .add-todos {
-        padding: 20px;
-    }
-
     .todolist {
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
         li {
             color: #333;
+            display: flex;
+            align-items: center;
+            line-height: 20px;
+            margin-bottom: 10px;
+
+            input {
+                display: none;
+            }
+
+            input:checked + label {
+                &:before {
+                    border-color: cyan;
+                }
+                &:after {
+                    color: cyan;
+                    content: 'V';
+                    left: 6px;
+                    position: absolute;
+                    transform: rotate(-18deg);
+                }
+            }
+            label {
+                display: flex;
+                align-items: center;
+                padding: 10px;
+                padding-left: 0;
+                position: relative;
+                &:before {
+                    border: 1px solid paleturquoise;
+                    content: '';
+                    display: inline-block;
+                    height: 20px;
+                    margin-right: 10px;
+                    width: 20px;
+                }
+            }
+            button {
+                background-color: palevioletred;
+                border-color: brown;
+                color: azure;
+            }
         }
     }
 }
 
 .todo {
         &.done {
-            text-decoration: line-through;
+            label {
+                color: #ccc;
+                text-decoration: line-through;
+            }
         }
 }
