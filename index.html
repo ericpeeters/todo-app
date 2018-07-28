@@ -25,9 +25,8 @@
         <li class="todo {{#done}}done{{/done}}">
             <input id="{{ date }}" class="js-todo-checkbox" type="checkbox" {{#done}}checked="checked"{{/done}}>
             <label for="{{ date }}">{{ title }}</label>
-            <button>X</button>
+            <button class="js-delete">X</button>
         </li>
-
     </script>
 
     <script src="dist/main.js"></script>

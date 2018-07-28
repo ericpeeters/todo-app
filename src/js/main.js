@@ -9,6 +9,7 @@ import { formatDate } from './date';
 ///////////////////////////////////////////////////////////////////////
 
 const checkBoxSelector = '.js-todo-checkbox';
+const deleteButtonSelector = '.js-delete';
 
 const $todoList = $('.js-todos');
 const $singleTodoTemplate = $('.js-single-todo-item-template');
@@ -36,6 +37,8 @@ function onClickAddTodo() {
         date: formatDate(),
         done: false
     });
+
+    $newTodoInput.val('');
 }
 
 function bindAddEvent() {
@@ -58,9 +61,6 @@ function setTodoDone($todoListItem, $todoCheckbox) {
     todoData.done = true;
 
     saveTodos(todos);
-    // Find the todo
-    // set its state to 'done'
-    // save back to local storage
 }
 
 function setTodoPending($todoListItem, $todoCheckbox) {
@@ -94,12 +94,40 @@ function bindTodoDone($todo) {
     $checkbox.on('change', onTodoCheckboxChange);
 }
 
+function onClickDelete(event) {
+    const $deleteButton = $(event.target),
+        $todoCheckbox = $deleteButton.siblings(checkBoxSelector),
+        todos = loadTodos(),
+        date = $todoCheckbox.attr('id'),
+        todoData = todos.find(function (todo) {
+            return todo.date === date;
+        }),
+        index = todos.indexOf(todoData),
+        $todoParent = $deleteButton.parent();
+
+    console.log($todoCheckbox);
+    if (index > -1) {
+        todos.splice(index, 1);
+    }
+
+    saveTodos(todos);
+
+    $todoParent.remove();
+}
+
+function bindDeleteTodo($todo) {
+    const $delete = $todo.find(deleteButtonSelector);
+
+    $delete.on('click', onClickDelete);
+}
+
 function showTodo(todo) {
     const todoHTML = createTodo(todo),
         $todoElement = $(todoHTML);
 
     $todoList.append($todoElement);
     bindTodoDone($todoElement);
+    bindDeleteTodo($todoElement);
 }
 
 function showTodos(todos) {
