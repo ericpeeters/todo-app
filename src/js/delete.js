@@ -2,10 +2,6 @@ import $ from "jquery";
 import { deleteButtonSelector, checkBoxSelector } from "./constants";
 import { loadTodos, saveTodos } from "./storage";
 
-///////////////////////////////////////////////////////////////////////
-//    Delete todo's
-///////////////////////////////////////////////////////////////////////
-
 function onClickDelete(event) {
     const $deleteButton = $(event.target),
         $todoCheckbox = $deleteButton.siblings(checkBoxSelector),

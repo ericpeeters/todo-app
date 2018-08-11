@@ -15,6 +15,7 @@ import { loadTodos, saveTodos } from "./storage";
 import { formatDate } from "./date";
 import { bindDeleteTodo } from "./delete";
 import { bindTodoDone } from "./checkbox";
+import { initSorting } from "./sorting";
 
 const createTodo = handlebars.compile($singleTodoTemplate.html());
 
@@ -75,6 +76,8 @@ function init() {
 
     //events
     bindAddEvent();
+
+    initSorting();
 }
 
 $(init);

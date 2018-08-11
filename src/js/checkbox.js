@@ -3,10 +3,6 @@ import $ from "jquery";
 import { loadTodos, saveTodos } from "./storage";
 import { checkBoxSelector } from "./constants";
 
-///////////////////////////////////////////////////////////////////////
-//    Checking / unchecking of todo's
-///////////////////////////////////////////////////////////////////////
-
 function setTodoDone($todoListItem, $todoCheckbox) {
     $todoListItem.addClass("done");
 
